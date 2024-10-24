@@ -1,3 +1,5 @@
+**Available on Asset Store:** https://assetstore.unity.com/packages/tools/sprite-management/sprite-exporter-293562
+
 # Overview
 The SpriteExporter script is a Unity Editor tool designed to Export sliced sprites from a specified Texture2D into individual PNG files. This can be particularly useful for extracting and saving individual sprites from a Sprite Sheet.
 

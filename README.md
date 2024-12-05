@@ -6,8 +6,9 @@ The SpriteExporter script is a Unity Editor tool designed to Export sliced sprit
 ## How to Use
 * Ensure the SpriteExporter script is placed in the **Assets** folder within your Unity project.
 
-* Update the **spritePath** variable in the **ExportSlicedSprites** method to point to the texture containing the sliced sprites you want to export. You can get the path by right-clicking on the texture and selecting "Copy Path".
-
 * Ensure that the **Read/Write** property of the texture is enabled and the TextureType property of the texture is **Sprite (2D and UI)**.
 
-* In the Unity Editor, go to the menu bar and select **Tools > Export Sliced Sprites**. This will execute the script and export the sliced sprites.
+* In the Unity Editor, Right-click the Sprite Sheet PNG file in the Project view, then select **SpriteExporter > ExportFromSpriteSheet**. The individual sprites will be exported to the ExportedSprites folder located in the same directory as the original file.
+
+## Review
+* If you found it helpful or enjoyed using it, I’d greatly appreciate a quick review and rating on the Asset Store. Your feedback not only helps me improve but also supports other developers in discovering this tool. Thank you for your time and support!

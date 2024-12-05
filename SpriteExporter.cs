@@ -6,20 +6,32 @@ namespace SpriteExporter
 {
     public class SpriteExporter
     {
-        [MenuItem("Tools/Export Sliced Sprites")]
+        [MenuItem("Assets/SpriteExporter/ExportFromSpriteSheet")]
         public static void ExportSlicedSprites()
         {
-            string spritePath = "Assets/PathToYourSprite.png"; //Path to the sliced Sprite Sheet
-            Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(spritePath);
-            string outputDirectoryPath = "Assets/ExportedSprites/";
+            var selectedObject = Selection.activeObject;
+            if (selectedObject == null)
+            {
+                Debug.LogError("No object selected! Please select an object in the Project view.");
+                return;
+            }
 
+            string spriteSheetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+            if (string.IsNullOrEmpty(spriteSheetPath) || !spriteSheetPath.Contains(".png"))
+            {
+                Debug.LogError("The selected file is not a .png file. Please ensure a .png file is selected.");
+                return;
+            }
+            Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(spriteSheetPath);
+
+            string outputDirectoryPath = Path.Combine(Path.GetDirectoryName(spriteSheetPath), "ExportedSprites");
             if (!Directory.Exists(outputDirectoryPath))
             {
                 Directory.CreateDirectory(outputDirectoryPath);
             }
 
             //Get all the sliced sprites
-            Object[] assets = AssetDatabase.LoadAllAssetsAtPath(spritePath);
+            Object[] assets = AssetDatabase.LoadAllAssetsAtPath(spriteSheetPath);
             foreach (var asset in assets)
             {
                 if (asset is not Sprite sprite)
@@ -38,7 +50,7 @@ namespace SpriteExporter
                 byte[] pngData = newTexture.EncodeToPNG();
                 if (pngData != null)
                 {
-                    File.WriteAllBytes(outputDirectoryPath + sprite.name + ".png", pngData);
+                    File.WriteAllBytes(Path.Combine(outputDirectoryPath, sprite.name) + ".png", pngData);
                 }
             }
 
